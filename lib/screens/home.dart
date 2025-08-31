@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'Start your learning journey',
+                  'Learn with rhythm, play with knowledge',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
