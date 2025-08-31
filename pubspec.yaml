@@ -23,4 +23,8 @@ flutter:
 
   uses-material-design: true
 
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster-Regular.ttf
   
