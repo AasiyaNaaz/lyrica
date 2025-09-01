@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -27,4 +28,6 @@ flutter:
     - family: Lobster
       fonts:
         - asset: assets/fonts/Lobster-Regular.ttf
+  assets:
+    - assets/audio/
   
