@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lyrica/screens/home.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
   late final AnimationController _textController;
   late final Animation<double> _textScale;
   late final Animation<double> _textOpacity;
-
+  final AudioPlayer _audioPlayer = AudioPlayer();
   final Random _random = Random();
   final List<IconData> icons = [
     Icons.music_note,
@@ -49,20 +50,29 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
     Colors.cyan,
   ];
 
+  Future<void> _playMusic() async {
+    await _audioPlayer.play(AssetSource('audio/intro_music.m4a'));
+    await _audioPlayer.resume();
+  }
+
+  Future<void> _stopMusic() async {
+    await _audioPlayer.stop();
+  }
+
   @override
   void initState() {
     super.initState();
-
+    _playMusic();
     // Background floating icons controller
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 6),
     )..forward();
 
     // Text pop-up animation controller
     _textController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 1000),
     )..forward();
 
     _textScale = TweenSequence([
@@ -76,7 +86,7 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
     ).animate(CurvedAnimation(parent: _textController, curve: Curves.easeIn));
 
     // Go to HomePage after 4 seconds
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 5), () async {
       Navigator.of(
         context,
       ).pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
@@ -85,6 +95,7 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    _audioPlayer.dispose();
     _controller.dispose();
     _textController.dispose();
     super.dispose();
