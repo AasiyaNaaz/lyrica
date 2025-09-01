@@ -176,7 +176,7 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
                         'Lyrica',
                         style: TextStyle(
                           fontFamily: 'Lobster',
-                          fontSize: 48,
+                          fontSize: 62,
                           color: color,
                           letterSpacing: 2,
                         ),
