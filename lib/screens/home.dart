@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontFamily: 'Lobster',
                     fontSize: 42,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     letterSpacing: 2,
                   ),
                 ),
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white70,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -157,14 +157,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 _AnimatedNavButton(
                   icon: Icons.home,
                   label: 'Home',
-                  color: Colors.purpleAccent,
+                  color: Color.fromARGB(255, 255, 232, 238),
                   scale: 1 + (_selectedIndex == 0 ? _tapController.value : 0),
                   onTap: () => _onNavTap(0),
                 ),
                 _AnimatedNavButton(
                   icon: Icons.person,
                   label: 'Profile',
-                  color: Colors.purpleAccent,
+                  color: Color.fromARGB(255, 255, 232, 238),
                   scale: 1 + (_selectedIndex == 1 ? _tapController.value : 0),
                   onTap: () => _onNavTap(1),
                 ),
