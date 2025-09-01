@@ -66,7 +66,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.settings, color: Colors.white),
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Color.fromARGB(255, 255, 232, 238),
+                  ),
                   onPressed: () {},
                 ),
               ],
@@ -107,21 +110,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 children: [
                   _CategoryButton(
                     icon: Icons.book,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Data Structures',
                     onTap: () {},
                   ),
                   _CategoryButton(
                     icon: Icons.laptop,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Kryptography',
                     onTap: () {},
                   ),
                   _CategoryButton(
                     icon: Icons.business,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Constructions',
                     onTap: () {},
                   ),
                   _CategoryButton(
                     icon: Icons.music_note,
+                    color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Resonance',
                     onTap: () {},
                   ),
@@ -150,7 +157,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: AnimatedBuilder(
           animation: Listenable.merge([_hueController, _tapController]),
           builder: (context, _) {
-            final hueColor = _getHueColor(_hueController.value);
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -186,6 +192,7 @@ class _CategoryButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    required Color color,
   });
 
   @override
@@ -207,13 +214,13 @@ class _CategoryButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 50, color: Colors.white),
+            Icon(icon, size: 50, color: Color.fromARGB(255, 255, 232, 238)),
             const SizedBox(height: 15),
             Text(
               label,
               style: const TextStyle(
                 fontSize: 18,
-                color: Colors.white,
+                color: Color.fromARGB(255, 255, 232, 238),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -251,7 +258,7 @@ class _AnimatedNavButton extends StatelessWidget {
             Icon(
               icon,
               size: 28,
-              color: color,
+              color: Color.fromARGB(255, 255, 232, 238),
               shadows: [Shadow(color: color.withOpacity(0.7), blurRadius: 10)],
             ),
             const SizedBox(height: 4),
