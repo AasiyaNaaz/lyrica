@@ -73,7 +73,7 @@ class _level1PageState extends State<level1Page>
     } else if (sm == 'Wind') {
       path = '${path}C/C4#$end';
     } else if (sm == 'Earthquake') {
-      path = '${path}F/F4#';
+      path = '${path}F/F4#$end';
     }
     //print(path);
     return path;
@@ -482,8 +482,8 @@ class _level1PageState extends State<level1Page>
                       image: DecorationImage(
                         image: AssetImage(
                           selectedMaterial == 'Brick'
-                              ? 'assets/images/brick.jpeg'
-                              : 'assets/images/wood.png',
+                              ? 'images/brick.jpg'
+                              : 'images/wood.png',
                         ),
                         fit: BoxFit.cover,
                       ),

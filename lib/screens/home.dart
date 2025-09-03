@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrica/screens/structures_pages/structures_main_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -124,7 +125,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     icon: Icons.business,
                     color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Structures',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapPage()),
+                      );
+                    },
                   ),
                   _CategoryButton(
                     icon: Icons.music_note,

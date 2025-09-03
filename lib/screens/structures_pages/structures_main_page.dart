@@ -48,7 +48,9 @@ class _MapPageState extends State<MapPage> {
             } else if (i == 1) {
               final resultStars = await Navigator.push<int>(
                 context,
-                MaterialPageRoute(builder: (context) => level1Page()), //TODO change it to level 2 page after adding
+                MaterialPageRoute(
+                  builder: (context) => level1Page(),
+                ), //TODO change it to level 2 page after adding
               );
               setState(() {
                 starsWon[i] = resultStars!;
@@ -128,7 +130,7 @@ class _MapPageState extends State<MapPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
-          5 * 150.0,
+          1 * 150.0,
           duration: const Duration(seconds: 1),
           curve: Curves.easeInOut,
         );
@@ -166,8 +168,9 @@ class _MapPageState extends State<MapPage> {
                 elevation: 0,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () =>
-                      debugPrint("Back pressed"), // TODO need to be connected
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }, // TODO need to be connected
                 ),
                 actions: [
                   IconButton(
