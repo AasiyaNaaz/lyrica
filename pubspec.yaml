@@ -30,5 +30,13 @@ flutter:
       fonts:
         - asset: assets/fonts/Lobster-Regular.ttf
   assets:
-    - assets/audio/
+    - assets/audio/intro_music.m4a
+    - assets/audio/A/
+    - assets/audio/B/
+    - assets/audio/C/
+    - assets/audio/D/
+    - assets/audio/E/
+    - assets/audio/F/
+    - assets/audio/G/
+    - assets/images/
   
