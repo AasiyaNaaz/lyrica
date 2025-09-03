@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:lyrica/screens/structures_pages/help_button_class.dart';
 
 class level1Page extends StatefulWidget {
   @override
@@ -112,7 +113,6 @@ class _level1PageState extends State<level1Page>
     _showEndResultDialog();
   }
 
-  // Returns true if wall survives this calamity (for "Done" run)
   bool _checkCalamityEffect(String calamity) {
     final bool windKills =
         (calamity == 'Wind' &&
@@ -332,7 +332,7 @@ class _level1PageState extends State<level1Page>
   }
 
   // When the level is finished
-  void finishLevel() {
+  void finishLevel() async {
     int starsEarned;
     if (wallSurvived) {
       starsEarned = 3;
@@ -564,7 +564,12 @@ class _level1PageState extends State<level1Page>
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: isTesting ? null : testAllCalamities,
+              onPressed: () async {
+                await showLearningDialogs(context); // show all dialogs first
+                if (!isTesting) {
+                  await testAllCalamities(); // 👈 actually call the function
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(120, 85, 0, 255),
               ),
