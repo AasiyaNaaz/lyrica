@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   _CategoryButton(
                     icon: Icons.business,
                     color: Color.fromARGB(255, 255, 232, 238),
-                    label: 'Constructions',
+                    label: 'Structures',
                     onTap: () {},
                   ),
                   _CategoryButton(
