@@ -207,3 +207,145 @@ class HelpDialogs {
     }
   }
 }
+
+//after level learning
+Future<void> showLearningDialogs(BuildContext context) async {
+  final List<Map<String, String>> dialogs = [
+    {
+      "title": "✨ The Resonance Trap",
+      "icon": "🎵",
+      "content":
+          "Ever tried singing in the bathroom and the walls suddenly vibe with you? "
+          "That’s resonance!\n\n"
+          "When materials like wood or brick face disturbances at their natural frequency, "
+          "the vibrations get amplified like a speaker turned up too high. "
+          "Bigger shakes → bigger trouble → sometimes even collapse.",
+    },
+    {
+      "title": "🧱 Stack Attack",
+      "icon": "📦",
+      "content":
+          "Stacking materials of the same frequency? Think of it like stacking speakers "
+          "blasting the same bass beat—LOUDER and stronger!\n\n"
+          "When similar frequencies pile up in a structure, the overall frequency gets boosted "
+          "(ignoring other construction soup ingredients).",
+    },
+    {
+      "title": "🎹 The Piano Test",
+      "icon": "🎼",
+      "content":
+          "To make this less boring than an engineering textbook, let’s match frequencies "
+          "with piano notes.\n\n"
+          "• Wood → higher pitch than brick 🌳\n"
+          "• Brick → lower pitch 🧱\n\n"
+          "🌪️ Wind usually plays in the 1–5 Hz band → if your structure lands there → bye-bye building!\n\n"
+          "🌍 Earthquakes jam harder at 6–7 Hz → unlucky if your design sings in that range.",
+    },
+    {
+      "title": "🏗️ Brick vs. Wood: The Survival Game",
+      "icon": "⚔️",
+      "content":
+          "Since wood naturally has a higher frequency than brick, it’s like the older sibling "
+          "who can’t be pushed around easily.\n\n"
+          "That means: you need MORE levels of brick than wood to escape the dangerous frequency "
+          "bands of wind and earthquakes.\n\n"
+          "Moral: pick your blocks wisely, or nature will remix your building into rubble.",
+    },
+  ];
+
+  // Sequentially show all dialogs
+  for (int i = 0; i < dialogs.length; i++) {
+    await showDialog(
+      context: context,
+      barrierDismissible: false, // must press button
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(20),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color.fromARGB(255, 202, 153, 255), Color.fromARGB(255, 155, 191, 255)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                blurRadius: 15,
+                offset: const Offset(5, 8),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Title with icon
+              Row(
+                children: [
+                  Text(
+                    dialogs[i]["icon"]!,
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      dialogs[i]["title"]!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+
+              // Content
+              SingleChildScrollView(
+                child: Text(
+                  dialogs[i]["content"]!,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    height: 1.5,
+                    color: Colors.white70,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Next button
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.deepPurple,
+                  elevation: 8,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  shadowColor: Colors.deepPurpleAccent,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  i == dialogs.length - 1 ? "🚀 Next Level" : "Next →",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
