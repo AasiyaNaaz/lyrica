@@ -114,9 +114,14 @@ class _level1PageState extends State<level1Page>
 
   // Returns true if wall survives this calamity (for "Done" run)
   bool _checkCalamityEffect(String calamity) {
-    //if height > 6 then wind destroys; if wood then earthquake destroys
-    final bool windKills = (calamity == 'Wind' && wallHeight < 4);
-    final bool quakeKills = (calamity == 'Earthquake' && wallHeight < 5);
+    final bool windKills =
+        (calamity == 'Wind' &&
+        ((selectedMaterial == 'Brick' && wallHeight < 5) ||
+            (selectedMaterial == 'Wood' && wallHeight < 4)));
+    final bool quakeKills =
+        (calamity == 'Earthquake' &&
+        ((selectedMaterial == 'Brick' && wallHeight < 6) ||
+            (selectedMaterial == 'Wood' && wallHeight < 5)));
 
     if (windKills || quakeKills) {
       setState(() {
@@ -137,7 +142,7 @@ class _level1PageState extends State<level1Page>
   Future<void> applyCalamity(String calamity) async {
     bool destroyed = false;
 
-    if (calamity == 'Wind') {
+    if (calamity == 'Wind' && selectedMaterial == 'Wood') {
       destroyed = wallHeight < 4;
       if (destroyed) {
         setState(() => wallCollapsed = true);
@@ -148,8 +153,30 @@ class _level1PageState extends State<level1Page>
       } else {
         await _showCenterMessage("Wind wasn’t strong enough!");
       }
-    } else if (calamity == 'Earthquake') {
+    } else if (calamity == 'Wind' && selectedMaterial == 'Brick') {
       destroyed = wallHeight < 5;
+      if (destroyed) {
+        setState(() => wallCollapsed = true);
+        _controller.forward(from: 0);
+        await _showCenterMessage(
+          "Wind destroyed the wall!\nTry building it taller",
+        );
+      } else {
+        await _showCenterMessage("Wind wasn’t strong enough!");
+      }
+    } else if (calamity == 'Earthquake' && selectedMaterial == 'Wood') {
+      destroyed = wallHeight < 5;
+      if (destroyed) {
+        setState(() => wallCollapsed = true);
+        _controller.forward(from: 0);
+        await _showCenterMessage(
+          "Earthquake destroyed the wall!\nTry building it taller",
+        );
+      } else {
+        await _showCenterMessage("Earthquake had no effect on the wall!");
+      }
+    } else if (calamity == 'Earthquake' && selectedMaterial == 'Brick') {
+      destroyed = wallHeight < 6;
       if (destroyed) {
         setState(() => wallCollapsed = true);
         _controller.forward(from: 0);
