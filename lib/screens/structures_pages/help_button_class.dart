@@ -349,3 +349,151 @@ Future<void> showLearningDialogs(BuildContext context) async {
     );
   }
 }
+
+Future<void> showLevel2LearningDialogs(BuildContext context) async {
+  final List<Map<String, String>> dialogs = [
+    {
+      "title": "🛠️ Side-by-Side Secrets",
+      "icon": "🔗",
+      "content":
+          "In Level 2, you learned that the order of your blocks doesn’t affect the overall natural frequency when materials are placed side by side. "
+          "Think of it like a team of dancers — whether steel leads or wood does, the rhythm of the dance floor stays the same! 🎵"
+          "\n\nSo stacking different materials doesn’t magically change the frequency — you’ve got to choose wisely."
+    },
+    {
+      "title": "📊 Frequency Hierarchy",
+      "icon": "⚡",
+      "content":
+          "Remember the natural frequency order:\n\n"
+          "• Steel → highest 🏋️‍♂️\n"
+          "• Wood → medium 🌳\n"
+          "• Brick → lowest 🧱\n\n"
+          "This matters because:\n"
+          "• Human footstep vibrations? Wood and Steel shrug them off. 🦶😎\n"
+          "• Wind? Only Steel can stand tall. 🌬️💪\n\n"
+          "Moral: sometimes being too light (or too heavy) can get your bridge in trouble!"
+    },
+    {
+      "title": "🌪️ Surviving the Elements",
+      "icon": "🛡️",
+      "content":
+          "In this level, you learned that **Wind is a big bully** — it destroys Wood and Brick, but Steel flexes like a superhero cape and survives.\n"
+          "Human footsteps are more like tickles — Brick takes the hit, Wood and Steel barely notice.\n\n"
+          "The challenge? Choose the right material to match the disaster, because brute force alone won’t save your bridge!"
+    },
+    {
+      "title": "🎯 Strategy Tips",
+      "icon": "🧠",
+      "content":
+          "• Side-by-side placement won’t save you — focus on the material choice! \n"
+          "• Steel is your Wind superhero 🦸‍♂️. \n"
+          "• Wood is reliable against foot traffic, but Wind will mess it up 🌬️🌳. \n"
+          "• Brick is the underdog — watch your step 🧱⚡.\n\n"
+          "Think like an engineer, not a gambler. Predict, plan, and place your blocks wisely!"
+    },
+    {
+      "title": "✨ Fun Fact",
+      "icon": "🎹",
+      "content":
+          "Just like piano keys, each material has its own pitch. Steel sings the highest note, Wood hums in the middle, and Brick groans the lowest.\n"
+          "If the disaster hits at the same frequency as your bridge's note… well, let’s just say the music stops abruptly! 🎵💥\n\n"
+          "Remember: winning isn’t just about building tall — it’s about **building smart**!"
+    },
+  ];
+
+  // Sequentially show all dialogs
+  for (int i = 0; i < dialogs.length; i++) {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(20),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color.fromARGB(255, 155, 191, 255), Color.fromARGB(255, 202, 153, 255)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                blurRadius: 15,
+                offset: const Offset(5, 8),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Title with icon
+              Row(
+                children: [
+                  Text(
+                    dialogs[i]["icon"]!,
+                    style: const TextStyle(fontSize: 28),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      dialogs[i]["title"]!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
+
+              // Content
+              SingleChildScrollView(
+                child: Text(
+                  dialogs[i]["content"]!,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    height: 1.5,
+                    color: Colors.white70,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Next button
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.deepPurple,
+                  elevation: 8,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  shadowColor: Colors.deepPurpleAccent,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  i == dialogs.length - 1 ? "🚀 Next Level" : "Next →",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
