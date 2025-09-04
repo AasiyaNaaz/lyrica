@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lyrica/screens/structures_pages/level1_page.dart';
 import 'package:lyrica/screens/structures_pages/help_button_class.dart';
+import 'package:lyrica/screens/structures_pages/level2_page.dart';
 
 class PointModel {
   final Widget widget;
@@ -29,7 +30,7 @@ class _MapPageState extends State<MapPage> {
       HelpDialogs.checkFirstTime(context); // Auto-show for first time
     });
 
-    starsWon = [0, 2, 1, 0, 0, 0, 0, 0, 0, 0];
+    starsWon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     // levels
     points = List.generate(
@@ -48,9 +49,7 @@ class _MapPageState extends State<MapPage> {
             } else if (i == 1) {
               final resultStars = await Navigator.push<int>(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => level1Page(),
-                ), //TODO change it to level 2 page after adding
+                MaterialPageRoute(builder: (context) => level2Page()),
               );
               setState(() {
                 starsWon[i] = resultStars!;
@@ -170,7 +169,7 @@ class _MapPageState extends State<MapPage> {
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.pop(context);
-                  }, // TODO need to be connected
+                  },
                 ),
                 actions: [
                   IconButton(
