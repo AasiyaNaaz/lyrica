@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:lyrica/screens/structures_pages/help_button_class.dart';
+import 'package:lyrica/screens/structures_pages/level2_page.dart';
 
 class level1Page extends StatefulWidget {
   @override
@@ -439,8 +440,7 @@ class _level1PageState extends State<level1Page>
                       Navigator.push<void>(
                         context,
                         MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              level1Page(), //TODO change to level2Page after adding level 2
+                          builder: (BuildContext context) => level2Page(),
                         ),
                       );
                     } else {
@@ -509,9 +509,10 @@ class _level1PageState extends State<level1Page>
                       image: DecorationImage(
                         image: AssetImage(
                           selectedMaterial == 'Brick'
-                              ? 'images/brick.jpg'
-                              : 'images/wood.png',
+                              ? 'assets/images/brick.jpg'
+                              : 'assets/images/wood.png',
                         ),
+
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(4),
