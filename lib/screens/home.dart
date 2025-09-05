@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrica/screens/data_structures_pages/data_Structure_mainPage.dart';
 import 'package:lyrica/screens/structures_pages/structures_main_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -113,13 +114,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     icon: Icons.book,
                     color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Data Structures',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage1()),
+                      );
+                    },
                   ),
                   _CategoryButton(
                     icon: Icons.laptop,
                     color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Kryptography',
-                    onTap: () {},
+                    onTap: () {
+
+                    },
                   ),
                   _CategoryButton(
                     icon: Icons.business,
