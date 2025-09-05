@@ -154,12 +154,13 @@ class LinkedListInteractivePage extends StatefulWidget {
   _LinkedListInteractivePageState createState() => _LinkedListInteractivePageState();
 }
 
-class _LinkedListInteractivePageState extends State<LinkedListInteractivePage> {
+class _LinkedListInteractivePageState extends State<LinkedListInteractivePage> { 
   final List<int> nodes = [];
   final AudioPlayer _audioPlayer = AudioPlayer();
   int? highlightedIndex;
   bool isTraversing = false;
   bool isDeleting = false;
+  bool isMuted = false;
 
   void _insertNode() {
     setState(() {
@@ -218,18 +219,24 @@ class _LinkedListInteractivePageState extends State<LinkedListInteractivePage> {
     });
   }
 
-  void _playMusic(String filename) async {
+void _playMusic(String filename) async {
+  if (isMuted) return; // Skip if muted
+
   await _audioPlayer.stop();
 
   // Use different source for Web vs Mobile
   if (kIsWeb) {
-    // For Web, use UrlSource and the full path inside assets folder
     await _audioPlayer.play(UrlSource('assets/$filename'));
   } else {
-    // For Mobile/desktop, keep AssetSource
     await _audioPlayer.play(AssetSource(filename));
   }
+
+  // Stop the audio after 2 seconds
+  Future.delayed(const Duration(seconds: 2), () {
+    _audioPlayer.stop();
+  });
 }
+
 
   void _showPopup(String message) {
     final overlay = Overlay.of(context);
@@ -326,12 +333,23 @@ class _LinkedListInteractivePageState extends State<LinkedListInteractivePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Linked List Interactive"),
-        backgroundColor: const Color.fromARGB(255, 45, 24, 80),
-      ),
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text("Linked List Interactive"),
+      backgroundColor: const Color.fromARGB(255, 45, 24, 80),
+      actions: [
+        IconButton(
+          icon: Icon(isMuted ? Icons.volume_off : Icons.volume_up),
+          onPressed: () {
+            setState(() {
+              isMuted = !isMuted;
+            });
+          },
+        ),
+      ],
+    ),
+
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
