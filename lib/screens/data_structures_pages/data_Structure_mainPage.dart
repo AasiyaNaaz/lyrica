@@ -2,49 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:lyrica/screens/data_structures_pages/Trees.dart';
 import 'package:lyrica/screens/data_structures_pages/linkedLIst.dart';
 
-
-
 class HomePage1 extends StatelessWidget {
   final List<Map<String, dynamic>> dataStructures = [
     {
       "title": "Linked List",
       "subtitle": "Visualize linked list",
-      "icon": Icons.linear_scale,
       "color": Colors.purple.withOpacity(0.25),
-      "page":  LinkedListIntroPage(),
+      "page": LinkedListIntroPage(),
     },
     {
       "title": "Trees",
       "subtitle": "Explore tree structures",
-      "icon": Icons.account_tree,
       "color": Colors.green.withOpacity(0.25),
-      "page":TreeMusicPage(),
+      "page": TreeMusicPage(),
     },
     {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
-      "icon": Icons.merge_type,
       "color": Colors.pink.withOpacity(0.25),
       "page": null,
     },
     {
       "title": "Graphs",
       "subtitle": "Coming soon",
-      "icon": Icons.timeline,
       "color": Colors.teal.withOpacity(0.25),
       "page": null,
     },
     {
       "title": "Stacks",
       "subtitle": "Visualize stack behavior",
-      "icon": Icons.layers,
       "color": Colors.orange.withOpacity(0.25),
       "page": null,
     },
     {
       "title": "Queues",
       "subtitle": "Learn queue operations",
-      "icon": Icons.queue,
       "color": Colors.blue.withOpacity(0.25),
       "page": null,
     },
@@ -85,32 +77,38 @@ class HomePage1 extends StatelessWidget {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(item["icon"], color: Colors.white, size: 30),
-              const SizedBox(height: 10),
-              Text(
-                item["title"],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    item["title"],
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 5),
-              Text(
-                item["subtitle"],
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 11,
+                const SizedBox(height: 6),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    item["subtitle"],
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -153,7 +151,7 @@ class HomePage1 extends StatelessWidget {
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  childAspectRatio: 1.25,
+                  childAspectRatio: 1.2, // adjusted to fit text better
                   padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   physics: const BouncingScrollPhysics(),
                   children: dataStructures
