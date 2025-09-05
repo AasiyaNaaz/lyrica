@@ -16,7 +16,7 @@ class HomePage1 extends StatelessWidget {
     {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
-      "color": Colors.pink,
+      "color": const Color.fromARGB(255, 40, 9, 180),
       "page": MergingArraysPage(),
     },
     {
@@ -28,13 +28,13 @@ class HomePage1 extends StatelessWidget {
     {
       "title": "Stacks",
       "subtitle": "Visualize stack behavior",
-      "color": Colors.orange,
+      "color": const Color.fromARGB(255, 151, 7, 108),
       "page": StackPage(),
     },
     {
       "title": "Sorting Arrays",
       "subtitle": "Learn queue operations",
-      "color": Colors.blue,
+      "color": const Color.fromARGB(255, 52, 16, 119),
       "page": SortingPage(),
     },
     {
