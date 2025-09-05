@@ -21,18 +21,19 @@ class _SortingPageState extends State<SortingPage> {
   bool isRunning = false;
   int bouncingIndex = -1;
 
-  final AudioPlayer _bgNoisePlayer = AudioPlayer();
-  final AudioPlayer _finalSongPlayer = AudioPlayer();
+  final AudioPlayer _notePlayer = AudioPlayer();
 
   final List<String> partFiles = const [
-    'sounds/part_1.mp3',
-    'sounds/part_2.mp3',
-    'sounds/part_3.mp3',
-    'sounds/part_4.mp3',
-    'sounds/part_5.mp3',
+    '../audio/sounds/D1.ogg',
+    '../audio/sounds/D2.ogg',
+    '../audio/sounds/D3.ogg',
+    '../audio/sounds/D4.ogg',
+    '../audio/sounds/D5.ogg',
+    '../audio/sounds/D6.ogg',
+    '../audio/sounds/D7.ogg',
   ];
-  final String clumsyMix = 'sounds/clumsy_mix.mp3';
-  final String finalSong = 'sounds/final_song.mp3';
+  final String clumsyMix = '../audio/sounds/clumpsy_mix.wav';
+  final String finalSong = '../audio/sounds/final_song.wav';
 
   // Scroll controllers for visible arrow scrolling
   final ScrollController _sortedScrollController = ScrollController();
@@ -40,10 +41,10 @@ class _SortingPageState extends State<SortingPage> {
 
   @override
   void dispose() {
-    _bgNoisePlayer.stop();
-    _finalSongPlayer.stop();
-    _bgNoisePlayer.dispose();
-    _finalSongPlayer.dispose();
+    _notePlayer.stop();
+    _notePlayer.stop();
+    _notePlayer.dispose();
+    _notePlayer.dispose();
     _sortedScrollController.dispose();
     _unsortedScrollController.dispose();
     super.dispose();
@@ -51,42 +52,39 @@ class _SortingPageState extends State<SortingPage> {
 
   Future<void> _startClumsyBackground() async {
     try {
-      await _bgNoisePlayer.stop();
-      await _bgNoisePlayer.setReleaseMode(ReleaseMode.loop);
-      await _bgNoisePlayer.play(AssetSource(clumsyMix));
+      await _notePlayer.stop();
+      await _notePlayer.setReleaseMode(ReleaseMode.loop);
+      await _notePlayer.play(AssetSource('../audio/sounds/clumpsy_mix.m4a'));
     } catch (e) {
-      // ignore errors silently as before
+      print("Error playing background: $e");
     }
   }
 
   Future<void> _stopClumsyBackground() async {
     try {
-      await _bgNoisePlayer.stop();
-    } catch (_) {}
+      await _notePlayer.stop();
+    } catch (e) {
+      print("Error stopping background: $e");
+    }
   }
 
   Future<void> _playNoteForIndex(int i) async {
-    final path = partFiles[i % partFiles.length];
-    final player = AudioPlayer();
+    final path = '../audio/sounds/D${(i % 7) + 1}.ogg';
     try {
-      await player.play(AssetSource(path));
-      player.onPlayerComplete.listen((_) async {
-        try {
-          await player.dispose();
-        } catch (_) {}
-      });
+      await _notePlayer.stop(); // stop previous note if any
+      await _notePlayer.play(AssetSource(path));
     } catch (e) {
-      try {
-        await player.dispose();
-      } catch (_) {}
+      print("Error playing note $i: $e");
     }
   }
 
   Future<void> _playFinalSong() async {
     try {
-      await _finalSongPlayer.stop();
-      await _finalSongPlayer.play(AssetSource(finalSong));
-    } catch (_) {}
+      await _notePlayer.stop();
+      await _notePlayer.play(AssetSource('../audio/sounds/final_song.wav'));
+    } catch (e) {
+      print("Error playing final song: $e");
+    }
   }
 
   Future<void> _bounceIndex(int globalIndex) async {
@@ -104,8 +102,9 @@ class _SortingPageState extends State<SortingPage> {
     required bool isBouncing,
     required Key key,
   }) {
-    final baseColor =
-        isSorted ? Colors.green : (isMin ? Colors.orange : Colors.blueAccent);
+    final baseColor = isSorted
+        ? Colors.green
+        : (isMin ? Colors.orange : Colors.blueAccent);
 
     return AnimatedScale(
       key: key,
@@ -188,8 +187,7 @@ class _SortingPageState extends State<SortingPage> {
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 420),
                   child: Row(
-                    key:
-                        ValueKey('sorted_${sorted.length}_${numbers.length}'),
+                    key: ValueKey('sorted_${sorted.length}_${numbers.length}'),
                     children: sorted.asMap().entries.map((e) {
                       final localIdx = e.key;
                       final val = e.value;
@@ -209,8 +207,7 @@ class _SortingPageState extends State<SortingPage> {
             ),
             // right arrow
             IconButton(
-              icon:
-                  const Icon(Icons.arrow_forward_ios, color: Colors.white70),
+              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white70),
               onPressed: () => _scrollBy(_sortedScrollController, 120),
             ),
           ],
@@ -239,7 +236,8 @@ class _SortingPageState extends State<SortingPage> {
                   duration: const Duration(milliseconds: 420),
                   child: Row(
                     key: ValueKey(
-                        'unsorted_${unsorted.length}_${numbers.length}'),
+                      'unsorted_${unsorted.length}_${numbers.length}',
+                    ),
                     children: unsorted.asMap().entries.map((e) {
                       final local = e.key;
                       final val = e.value;
@@ -258,8 +256,7 @@ class _SortingPageState extends State<SortingPage> {
               ),
             ),
             IconButton(
-              icon:
-                  const Icon(Icons.arrow_forward_ios, color: Colors.white70),
+              icon: const Icon(Icons.arrow_forward_ios, color: Colors.white70),
               onPressed: () => _scrollBy(_unsortedScrollController, 120),
             ),
           ],
@@ -368,9 +365,7 @@ class _SortingPageState extends State<SortingPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text(
           "Concept Demo 💡",
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -416,8 +411,10 @@ class _SortingPageState extends State<SortingPage> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 900),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 24,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -451,21 +448,13 @@ class _SortingPageState extends State<SortingPage> {
                           onPressed: isRunning
                               ? null
                               : () {
-                                  final list = [
-                                    64,
-                                    25,
-                                    12,
-                                    22,
-                                    11,
-                                    37,
-                                    5,
-                                    18
-                                  ];
+                                  final list = [64, 25, 12, 22, 11, 37, 5, 18];
                                   list.shuffle();
                                   setState(() {
                                     numbers = list
-                                        .take(5 +
-                                            (DateTime.now().millisecond % 2))
+                                        .take(
+                                          5 + (DateTime.now().millisecond % 2),
+                                        )
                                         .toList();
                                     sortedUntil = -1;
                                     minIndex = -1;
@@ -485,7 +474,7 @@ class _SortingPageState extends State<SortingPage> {
                               : () async {
                                   await _stopClumsyBackground();
                                   try {
-                                    await _finalSongPlayer.stop();
+                                    await _notePlayer.stop();
                                   } catch (_) {}
                                   setState(() {
                                     isRunning = false;

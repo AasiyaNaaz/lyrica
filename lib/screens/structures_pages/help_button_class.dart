@@ -231,11 +231,11 @@ Future<void> showLearningDialogs(BuildContext context) async {
           "(ignoring other construction soup ingredients).",
     },
     {
-      "title": "🎹 The Piano Test",
+      "title": "🎹 The Song Test",
       "icon": "🎼",
       "content":
           "To make this less boring than an engineering textbook, let’s match frequencies "
-          "with piano notes.\n\n"
+          "with song tone.\n\n"
           "• Wood → higher pitch than brick 🌳\n"
           "• Brick → lower pitch 🧱\n\n"
           "🌪️ Wind usually plays in the 1–5 Hz band → if your structure lands there → bye-bye building!\n\n"
@@ -265,7 +265,10 @@ Future<void> showLearningDialogs(BuildContext context) async {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color.fromARGB(255, 202, 153, 255), Color.fromARGB(255, 155, 191, 255)],
+              colors: [
+                Color.fromARGB(255, 202, 153, 255),
+                Color.fromARGB(255, 155, 191, 255),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -358,7 +361,7 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
       "content":
           "In Level 2, you learned that the order of your blocks doesn’t affect the overall natural frequency when materials are placed side by side. "
           "Think of it like a team of dancers — whether steel leads or wood does, the rhythm of the dance floor stays the same! 🎵"
-          "\n\nSo stacking different materials doesn’t magically change the frequency — you’ve got to choose wisely."
+          "\n\nSo stacking different materials doesn’t magically change the frequency — you’ve got to choose wisely.",
     },
     {
       "title": "📊 Frequency Hierarchy",
@@ -371,7 +374,7 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
           "This matters because:\n"
           "• Human footstep vibrations? Wood and Steel shrug them off. 🦶😎\n"
           "• Wind? Only Steel can stand tall. 🌬️💪\n\n"
-          "Moral: sometimes being too light (or too heavy) can get your bridge in trouble!"
+          "Moral: sometimes being too light (or too heavy) can get your bridge in trouble!",
     },
     {
       "title": "🌪️ Surviving the Elements",
@@ -379,7 +382,7 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
       "content":
           "In this level, you learned that **Wind is a big bully** — it destroys Wood and Brick, but Steel flexes like a superhero cape and survives.\n"
           "Human footsteps are more like tickles — Brick takes the hit, Wood and Steel barely notice.\n\n"
-          "The challenge? Choose the right material to match the disaster, because brute force alone won’t save your bridge!"
+          "The challenge? Choose the right material to match the disaster, because brute force alone won’t save your bridge!",
     },
     {
       "title": "🎯 Strategy Tips",
@@ -389,7 +392,7 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
           "• Steel is your Wind superhero 🦸‍♂️. \n"
           "• Wood is reliable against foot traffic, but Wind will mess it up 🌬️🌳. \n"
           "• Brick is the underdog — watch your step 🧱⚡.\n\n"
-          "Think like an engineer, not a gambler. Predict, plan, and place your blocks wisely!"
+          "Think like an engineer, not a gambler. Predict, plan, and place your blocks wisely!",
     },
     {
       "title": "✨ Fun Fact",
@@ -397,7 +400,7 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
       "content":
           "Just like piano keys, each material has its own pitch. Steel sings the highest note, Wood hums in the middle, and Brick groans the lowest.\n"
           "If the disaster hits at the same frequency as your bridge's note… well, let’s just say the music stops abruptly! 🎵💥\n\n"
-          "Remember: winning isn’t just about building tall — it’s about **building smart**!"
+          "Remember: winning isn’t just about building tall — it’s about **building smart**!",
     },
   ];
 
@@ -413,7 +416,10 @@ Future<void> showLevel2LearningDialogs(BuildContext context) async {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color.fromARGB(255, 155, 191, 255), Color.fromARGB(255, 202, 153, 255)],
+              colors: [
+                Color.fromARGB(255, 155, 191, 255),
+                Color.fromARGB(255, 202, 153, 255),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
