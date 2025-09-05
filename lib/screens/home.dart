@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lyrica/screens/data_structures_pages/data_Structure_mainPage.dart';
 import 'package:lyrica/screens/structures_pages/structures_main_page.dart';
+import 'package:lyrica/screens/cryptography/CryptographyPage.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -126,7 +128,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     color: Color.fromARGB(255, 255, 232, 238),
                     label: 'Kryptography',
                     onTap: () {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => const CryptographyPage(),
+                        ),
+                      );
                     },
                   ),
                   _CategoryButton(
