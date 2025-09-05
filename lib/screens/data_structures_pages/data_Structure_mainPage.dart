@@ -10,38 +10,38 @@ class HomePage1 extends StatelessWidget {
     {
       "title": "Linked List",
       "subtitle": "Visualize linked list",
-      "color": Colors.purple.withOpacity(0.25),
+      "color": Colors.purple,
       "page": LinkedListIntroPage(),
     },
     {
       "title": "Trees",
       "subtitle": "Explore tree structures",
-      "color": Colors.green.withOpacity(0.25),
+      "color": Colors.green,
       "page": TreeMusicPage(),
     },
     {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
-      "color": Colors.pink.withOpacity(0.25),
+      "color": Colors.pink,
       "page": MergingArraysPage(),
     },
     {
       "title": "Graphs",
       "subtitle": "Coming soon",
-      "color": Colors.teal.withOpacity(0.25),
+      "color": Colors.teal,
       "page": null,
     },
     {
       "title": "Stacks",
       "subtitle": "Visualize stack behavior",
-      "color": Colors.orange.withOpacity(0.25),
+      "color": Colors.orange,
       "page": StackPage(),
     },
     {
       "title": "Sorting Arrays",
       "subtitle": "Learn queue operations",
-      "color": Colors.blue.withOpacity(0.25),
-      "page":SortingPage(),
+      "color": Colors.blue,
+      "page": SortingPage(),
     },
   ];
 
@@ -65,7 +65,7 @@ class HomePage1 extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
         decoration: BoxDecoration(
-          color: item["color"],
+          color: item["color"]!.withOpacity(0.25),
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: Colors.white.withOpacity(0.3),
@@ -86,28 +86,32 @@ class HomePage1 extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    item["title"],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      item["title"],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 6),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    item["subtitle"],
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      item["subtitle"],
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
@@ -152,14 +156,20 @@ class HomePage1 extends StatelessWidget {
               const SizedBox(height: 18),
 
               Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.2, // adjusted to fit text better
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                  physics: const BouncingScrollPhysics(),
-                  children: dataStructures
-                      .map((item) => buildDataStructureButton(context, item))
-                      .toList(),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    // make grid adaptive
+                    double aspectRatio = (constraints.maxWidth / 2) / 120;
+                    return GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: aspectRatio,
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      physics: const BouncingScrollPhysics(),
+                      children: dataStructures
+                          .map((item) => buildDataStructureButton(context, item))
+                          .toList(),
+                    );
+                  },
                 ),
               ),
             ],
