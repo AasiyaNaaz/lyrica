@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
 
-
 class TreeMusicPage extends StatefulWidget {
   @override
   _TreeMusicPageState createState() => _TreeMusicPageState();
@@ -41,11 +40,10 @@ class TreeIntroPage extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Center(
-          child: Padding(
+        child: SafeArea(
+          child: SingleChildScrollView( // ✅ Scroll enabled
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: const EdgeInsets.all(20),
@@ -60,16 +58,14 @@ class TreeIntroPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: SingleChildScrollView(
-                    child: Text(
-                      treeInfo,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black87,
-                        height: 1.4,
-                      ),
-                      textAlign: TextAlign.justify,
+                  child: Text(
+                    treeInfo,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black87,
+                      height: 1.4,
                     ),
+                    textAlign: TextAlign.justify,
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -77,8 +73,8 @@ class TreeIntroPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.purple,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -100,8 +96,8 @@ class TreeIntroPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.green,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -126,6 +122,9 @@ class TreeIntroPage extends StatelessWidget {
     );
   }
 }
+
+
+
 
 class InteractiveTreePage extends StatefulWidget {
   @override
