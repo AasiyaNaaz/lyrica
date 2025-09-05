@@ -78,11 +78,11 @@ class _level1PageState extends State<level1Page>
     } else if (sm == 'Wood') {
       path = '${path}C/song$s$c$end';
     } else if (sm == 'Wind') {
-      path = '${path}C/C4#$end';
+      path = 'audio/F/F7.ogg';
     } else if (sm == 'Earthquake') {
-      path = '${path}F/F4#$end';
+      path = 'audio/F/F4.ogg';
     }
-    print(path);
+    //print(path);
     return path;
   }
 
@@ -674,7 +674,7 @@ class _level1PageState extends State<level1Page>
               title: const Text('Wind'),
               onTap: () async {
                 Navigator.pop(context);
-                playSound(pathForAudio(selectedMaterial, 1));
+                playSound(pathForAudio('Wind', 2));
                 await applyCalamity('Wind');
               },
             ),
@@ -682,7 +682,7 @@ class _level1PageState extends State<level1Page>
               title: const Text('Earthquake'),
               onTap: () async {
                 Navigator.pop(context);
-                playSound(pathForAudio(selectedMaterial, 1));
+                playSound(pathForAudio('Earthquake', 2));
                 await applyCalamity('Earthquake');
               },
             ),
