@@ -24,16 +24,16 @@ class _SortingPageState extends State<SortingPage> {
   final AudioPlayer _notePlayer = AudioPlayer();
 
   final List<String> partFiles = const [
-    '../audio/sounds/D1.ogg',
-    '../audio/sounds/D2.ogg',
-    '../audio/sounds/D3.ogg',
-    '../audio/sounds/D4.ogg',
-    '../audio/sounds/D5.ogg',
-    '../audio/sounds/D6.ogg',
-    '../audio/sounds/D7.ogg',
+    'audio/sounds/D1.ogg',
+    'audio/sounds/D2.ogg',
+    'audio/sounds/D3.ogg',
+    'audio/sounds/D4.ogg',
+    'audio/sounds/D5.ogg',
+    'audio/sounds/D6.ogg',
+    'audio/sounds/D7.ogg',
   ];
-  final String clumsyMix = '../audio/sounds/clumpsy_mix.wav';
-  final String finalSong = '../audio/sounds/final_song.wav';
+  final String clumsyMix = 'audio/sounds/clumpsy_mix.wav';
+  final String finalSong = 'audio/sounds/final_song.wav';
 
   // Scroll controllers for visible arrow scrolling
   final ScrollController _sortedScrollController = ScrollController();
@@ -54,7 +54,7 @@ class _SortingPageState extends State<SortingPage> {
     try {
       await _notePlayer.stop();
       await _notePlayer.setReleaseMode(ReleaseMode.loop);
-      await _notePlayer.play(AssetSource('../audio/sounds/clumpsy_mix.m4a'));
+      await _notePlayer.play(AssetSource('audio/sounds/clumpsy_mix.m4a'));
     } catch (e) {
       print("Error playing background: $e");
     }
@@ -69,7 +69,7 @@ class _SortingPageState extends State<SortingPage> {
   }
 
   Future<void> _playNoteForIndex(int i) async {
-    final path = '../audio/sounds/D${(i % 7) + 1}.ogg';
+    final path = 'audio/sounds/D${(i % 7) + 1}.ogg';
     try {
       await _notePlayer.stop(); // stop previous note if any
       await _notePlayer.play(AssetSource(path));
@@ -81,7 +81,7 @@ class _SortingPageState extends State<SortingPage> {
   Future<void> _playFinalSong() async {
     try {
       await _notePlayer.stop();
-      await _notePlayer.play(AssetSource('../audio/sounds/final_song.wav'));
+      await _notePlayer.play(AssetSource('audio/sounds/final_song.wav'));
     } catch (e) {
       print("Error playing final song: $e");
     }
