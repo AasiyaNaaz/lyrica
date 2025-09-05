@@ -3,7 +3,6 @@ import 'package:lyrica/screens/data_structures_pages/data_Structure_mainPage.dar
 import 'package:lyrica/screens/structures_pages/structures_main_page.dart';
 import 'package:lyrica/screens/cryptography/CryptographyPage.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -131,7 +130,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                        builder: (context) => const CryptographyPage(),
+                          builder: (context) => const CryptographyPage(),
                         ),
                       );
                     },
@@ -150,7 +149,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   _CategoryButton(
                     icon: Icons.music_note,
                     color: Color.fromARGB(255, 255, 232, 238),
-                    label: 'Resonance',
+                    label: 'Cryptyography',
                     onTap: () {},
                   ),
                 ],
