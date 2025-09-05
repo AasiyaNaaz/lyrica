@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:lyrica/screens/cryptography/SelectSongPage.dart';
+
 /// Shared blurred starry background
 class BlurredStarryBackground extends StatelessWidget {
   final Widget child;
@@ -182,56 +184,84 @@ class TopicPage2 extends StatelessWidget {
   }
 }
 
-/// 📘 Topic Page 3
 class TopicPage3 extends StatelessWidget {
   const TopicPage3({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlurredStarryBackground(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.purple.withOpacity(0.85),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: const Text(
-                  "In order to understand that we can listen both superposed one and measured one",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+      body: Stack(
+        children: [
+          // Background gradient only
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.black, Color(0xFF4B0082), Color(0xFF8A2BE2), Color(0xFF1E90FF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              const Spacer(),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  ),
-                  onPressed: () {
-                    // TODO: Navigate to your "Let's start" simulation page
-                  },
-                  child: const Text("Let's Start →"),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+
+          // Content
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const Spacer(),
+
+                // Text box
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Text(
+                    "In order to understand that we can listen both superposed one and measured one",
+                    style: TextStyle(
+                      fontSize: 14, // slightly smaller for phones
+                      color: Colors.white,
+                      height: 1.5,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+
+                const SizedBox(height: 40),
+
+                // Bottom right button
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {
+                      // Navigate to SelectSongPage
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SelectSongPage()),
+                      );
+                    },
+                    child: const Text(
+                      "Let's Started",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
