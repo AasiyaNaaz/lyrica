@@ -1,7 +1,6 @@
-
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lyrica/screens/cryptography/IntroPage.dart'; // ✅ Import your IntroPage
+import 'package:lyrica/screens/cryptography/IntroPage.dart';
 
 class CryptographyPage extends StatelessWidget {
   const CryptographyPage({super.key});
@@ -11,7 +10,6 @@ class CryptographyPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient Background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -21,15 +19,11 @@ class CryptographyPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Glittering stars effect
           Positioned.fill(
             child: CustomPaint(
               painter: StarryBackground(),
             ),
           ),
-
-          // Center rectangle button
           Center(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -37,13 +31,12 @@ class CryptographyPage extends StatelessWidget {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero, // sharp rectangle
+                  borderRadius: BorderRadius.zero,
                 ),
                 shadowColor: Colors.blueAccent.withOpacity(0.8),
                 elevation: 12,
               ),
               onPressed: () {
-                // ✅ Navigate to IntroPage
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const IntroPage()),
@@ -65,7 +58,6 @@ class CryptographyPage extends StatelessWidget {
   }
 }
 
-/// 🎇 Custom painter for starry glitter effect
 class StarryBackground extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -75,7 +67,7 @@ class StarryBackground extends CustomPainter {
     for (int i = 0; i < 120; i++) {
       final dx = random.nextDouble() * size.width;
       final dy = random.nextDouble() * size.height;
-      final radius = random.nextDouble() * 1.5; // tiny stars
+      final radius = random.nextDouble() * 1.5;
       paint.color = Colors.white.withOpacity(random.nextDouble());
       canvas.drawCircle(Offset(dx, dy), radius, paint);
     }
@@ -84,3 +76,4 @@ class StarryBackground extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:math';
@@ -142,9 +143,18 @@ class _InteractiveTreePageState extends State<InteractiveTreePage> {
   bool highlightForDelete = false;
 
   void _playMusic(String file) async {
-    await _player.stop();
-    await _player.play(AssetSource('audio/Data_Structures_audio/$file.mp3'));
+  await _player.stop();
+  await _player.play(AssetSource('audio/Data_Structures_audio/$file.mp3'));
+
+  // ⏳ Stop only for insert/delete sounds, not traverse
+  if (file == 'verse1' || file == 'verse3') {
+    Future.delayed(const Duration(seconds: 3), () {
+      _player.stop();
+    });
   }
+}
+
+
 
   void insertNode(int value) {
     if (isTraversing || isDeleting) return;

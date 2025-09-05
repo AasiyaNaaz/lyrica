@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   _CategoryButton(
                     icon: Icons.laptop,
                     color: Color.fromARGB(255, 255, 232, 238),
-                    label: 'Kryptography',
+                    label: 'Quantum Cryptography',
                     onTap: () {
                       Navigator.push(
                         context,

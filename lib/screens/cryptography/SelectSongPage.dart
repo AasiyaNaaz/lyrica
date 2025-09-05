@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lyrica/screens/cryptography/SimulationPage.dart';// ⬅️ Create this later
+import 'package:lyrica/screens/cryptography/SimulationPage.dart';
 
 class SelectSongPage extends StatefulWidget {
   const SelectSongPage({super.key});
@@ -9,7 +9,6 @@ class SelectSongPage extends StatefulWidget {
 }
 
 class _SelectSongPageState extends State<SelectSongPage> {
-  // Songs in your musica folder
   final List<String> songs = [
     "jingle1",
     "jingle2",
@@ -19,7 +18,6 @@ class _SelectSongPageState extends State<SelectSongPage> {
     "carol3",
   ];
 
-  // Selected songs will be stored here
   final List<String> selectedSongs = [];
 
   void toggleSongSelection(String song) {
@@ -39,33 +37,29 @@ class _SelectSongPageState extends State<SelectSongPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Colors.black,
-                  Color(0xFF4B0082), // Indigo
-                  Color(0xFF8A2BE2), // Violet
-                  Color(0xFF1E90FF), // Blue
+                  Color(0xFF4B0082),
+                  Color(0xFF8A2BE2),
+                  Color(0xFF1E90FF),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
           ),
-
-          // Content
           SafeArea(
             child: Column(
               children: [
                 const SizedBox(height: 20),
-
-                // Top Box
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2E0854), // Dark violet
+                    color: const Color(0xFF2E0854),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
@@ -77,10 +71,7 @@ class _SelectSongPageState extends State<SelectSongPage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 40),
-
-                // Song Buttons
                 Expanded(
                   child: Center(
                     child: Wrap(
@@ -96,7 +87,7 @@ class _SelectSongPageState extends State<SelectSongPage> {
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? Colors.deepPurpleAccent
-                                  : const Color(0xFF00008B), // Deep blue
+                                  : const Color(0xFF00008B),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: Colors.lightBlueAccent,
@@ -128,10 +119,7 @@ class _SelectSongPageState extends State<SelectSongPage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 30),
-
-                // Let's Go button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -163,7 +151,6 @@ class _SelectSongPageState extends State<SelectSongPage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 30),
               ],
             ),

@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:lyrica/screens/cryptography/SelectSongPage.dart';
 
-/// Shared blurred starry background
 class BlurredStarryBackground extends StatelessWidget {
   final Widget child;
 
@@ -14,7 +13,6 @@ class BlurredStarryBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Gradient background
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -24,29 +22,23 @@ class BlurredStarryBackground extends StatelessWidget {
             ),
           ),
         ),
-
-        // Starry effect
         Positioned.fill(
           child: CustomPaint(
             painter: StarryBackground(),
           ),
         ),
-
-        // Blur layer
         Positioned.fill(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: Colors.black.withOpacity(0)), // transparent overlay
+            child: Container(color: Colors.black.withOpacity(0)),
           ),
         ),
-
         child,
       ],
     );
   }
 }
 
-/// Star painter (reused from IntroPage)
 class StarryBackground extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -66,7 +58,6 @@ class StarryBackground extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-/// 📘 Topic Page 1
 class TopicPage1 extends StatelessWidget {
   const TopicPage1({super.key});
 
@@ -79,7 +70,6 @@ class TopicPage1 extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(),
-              // Text box
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -97,7 +87,6 @@ class TopicPage1 extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              // Next button
               Align(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
@@ -126,7 +115,6 @@ class TopicPage1 extends StatelessWidget {
   }
 }
 
-/// 📘 Topic Page 2
 class TopicPage2 extends StatelessWidget {
   const TopicPage2({super.key});
 
@@ -192,7 +180,6 @@ class TopicPage3 extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient only
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -202,15 +189,11 @@ class TopicPage3 extends StatelessWidget {
               ),
             ),
           ),
-
-          // Content
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 const Spacer(),
-
-                // Text box
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -220,17 +203,14 @@ class TopicPage3 extends StatelessWidget {
                   child: const Text(
                     "In order to understand that we can listen both superposed one and measured one",
                     style: TextStyle(
-                      fontSize: 14, // slightly smaller for phones
+                      fontSize: 14,
                       color: Colors.white,
                       height: 1.5,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-
                 const SizedBox(height: 40),
-
-                // Bottom right button
                 Align(
                   alignment: Alignment.bottomRight,
                   child: ElevatedButton(
@@ -243,7 +223,6 @@ class TopicPage3 extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Navigate to SelectSongPage
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => const SelectSongPage()),
@@ -266,3 +245,4 @@ class TopicPage3 extends StatelessWidget {
     );
   }
 }
+  

@@ -1,22 +1,25 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:lyrica/screens/cryptography/EavesdropperPage.dart';
 
 class SimulationPage extends StatefulWidget {
   final List<String> selectedSongs;
-  const SimulationPage({Key? key, required this.selectedSongs}) : super(key: key);
+  const SimulationPage({Key? key, required this.selectedSongs})
+      : super(key: key);
 
   @override
   State<SimulationPage> createState() => _SimulationPageState();
 }
 
-class _SimulationPageState extends State<SimulationPage> with SingleTickerProviderStateMixin {
-  final AudioPlayer _player1 = AudioPlayer();
-  final AudioPlayer _player2 = AudioPlayer();
+class _SimulationPageState extends State<SimulationPage>
+    with SingleTickerProviderStateMixin {
+  final player1 = AudioPlayer();
+  final player2 = AudioPlayer();
+
   double time = 0.0;
   Timer? _timer;
-
   late AnimationController _animationController;
 
   @override
@@ -25,25 +28,21 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..repeat(reverse: true);
-
-    // Start playing automatically
     playSongs();
   }
 
   Future<void> playSongs() async {
-    await _player1.stop();
-    await _player2.stop();
-
-    // Play songs from assets
-    await _player1.play(AssetSource("musica/${widget.selectedSongs[0]}.mp3"));
-    await _player2.play(AssetSource("musica/${widget.selectedSongs[1]}.mp3"));
-
-    // Start timer for wave animation
+    await player1.stop();
+    await player2.stop();
+    await player1.setAsset("assets/musica/${widget.selectedSongs[0]}.mp3");
+    await player2.setAsset("assets/musica/${widget.selectedSongs[1]}.mp3");
+    player1.play();
+    player2.play();
     _timer?.cancel();
     time = 0;
     _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
       setState(() {
-        time += 0.05; // increment time
+        time += 0.05;
         if (time > 50) timer.cancel();
       });
     });
@@ -51,8 +50,8 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
 
   @override
   void dispose() {
-    _player1.dispose();
-    _player2.dispose();
+    player1.dispose();
+    player2.dispose();
     _timer?.cancel();
     _animationController.dispose();
     super.dispose();
@@ -63,7 +62,6 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient background
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -78,10 +76,29 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
               ),
             ),
           ),
-          // Starry effect
           Positioned.fill(child: CustomPaint(painter: StarryPainter())),
-
-          // Waves
+          Positioned(
+            top: 40,
+            left: 20,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Center(
+                child: Text(
+                  "Simulating Superposition",
+                  style: TextStyle(
+                    color: Color(0xFF8A2BE2),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned.fill(
             child: AnimatedBuilder(
               animation: _animationController,
@@ -92,8 +109,20 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
               },
             ),
           ),
-
-          // Bottom-right Play Again button
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              ),
+              onPressed: playSongs,
+              child: const Text("Play Again"),
+            ),
+          ),
           Positioned(
             bottom: 20,
             right: 20,
@@ -101,10 +130,21 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               ),
-              onPressed: playSongs,
-              child: const Text("Play Again"),
+              onPressed: () async {
+                await player1.stop();
+                await player2.stop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        EavesdropperPage(selectedSongs: widget.selectedSongs),
+                  ),
+                );
+              },
+              child: const Text("Next →"),
             ),
           ),
         ],
@@ -113,7 +153,6 @@ class _SimulationPageState extends State<SimulationPage> with SingleTickerProvid
   }
 }
 
-// Starry background painter
 class StarryPainter extends CustomPainter {
   final Random random = Random();
 
@@ -132,7 +171,6 @@ class StarryPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-// Wave painter
 class WavePainter extends CustomPainter {
   final double time;
   WavePainter({required this.time});
@@ -160,11 +198,9 @@ class WavePainter extends CustomPainter {
     final pathSuper = Path();
 
     for (double x = 0; x <= size.width; x += 1) {
-      double y1 = size.height / 2 +
-          40 * sin((x / 50) + time); // song1 wave
-      double y2 = size.height / 2 +
-          40 * cos((x / 50) + time); // song2 wave
-      double ySuper = size.height / 2 + (y1 + y2 - size.height) / 2; // superposition
+      double y1 = size.height / 2 + 40 * sin((x / 50) + time);
+      double y2 = size.height / 2 + 40 * cos((x / 50) + time);
+      double ySuper = size.height / 2 + (y1 + y2 - size.height) / 2;
 
       if (x == 0) {
         path1.moveTo(x, y1);
@@ -181,7 +217,6 @@ class WavePainter extends CustomPainter {
     canvas.drawPath(path2, paint2);
     canvas.drawPath(pathSuper, paintSuper);
 
-    // Baby waves
     final paintBaby = Paint()
       ..color = Colors.white.withOpacity(0.5)
       ..strokeWidth = 1.5;
@@ -205,4 +240,6 @@ class WavePainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant WavePainter oldDelegate) => true;
 }
+
+
 

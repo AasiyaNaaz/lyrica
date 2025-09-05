@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lyrica/screens/cryptography/IntroPage.dart'; // import TopicPage1
+import 'package:lyrica/screens/cryptography/TopicPage.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -10,7 +10,6 @@ class IntroPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -20,23 +19,17 @@ class IntroPage extends StatelessWidget {
               ),
             ),
           ),
-
-          // Starry night effect
           Positioned.fill(
             child: CustomPaint(
               painter: StarryBackground(),
             ),
           ),
-
-          // Content layout
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 40),
-
-                // Title
                 const Center(
                   child: Text(
                     "Quantum Cryptography",
@@ -48,10 +41,7 @@ class IntroPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 40),
-
-                // Text box
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -68,10 +58,7 @@ class IntroPage extends StatelessWidget {
                     textAlign: TextAlign.justify,
                   ),
                 ),
-
                 const Spacer(),
-
-                // Bottom right button
                 Align(
                   alignment: Alignment.bottomRight,
                   child: ElevatedButton(
@@ -108,7 +95,6 @@ class IntroPage extends StatelessWidget {
   }
 }
 
-/// 🎇 Starry background painter
 class StarryBackground extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
