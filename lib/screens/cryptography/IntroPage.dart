@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lyrica/screens/cryptography/TopicPage.dart'; // import TopicPage1
+import 'package:lyrica/screens/cryptography/IntroPage.dart'; // import TopicPage1
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
