@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'galaxy_background.dart'; 
+import 'galaxy_background.dart';
 
 class SortingPage extends StatefulWidget {
   const SortingPage({super.key});
@@ -10,16 +10,16 @@ class SortingPage extends StatefulWidget {
 }
 
 class _SortingPageState extends State<SortingPage> {
-  
-  List<int> numbers = [64, 25, 12, 22, 11,-1,53];
+  List<int> numbers = [64, 25, 12, 22, 11, -1, 53];
 
-  int currentIndex = -1; 
-  int minIndex = -1; 
-  int sortedUntil = -1; 
+  int currentIndex = -1;
+  int minIndex = -1;
+  int sortedUntil = -1;
 
-  String statusMessage = "Tap Start to see Selection Sort in action and also compose music.";
+  String statusMessage =
+      "Tap Start to see Selection Sort in action and also compose music.";
   bool isRunning = false;
-  int bouncingIndex = -1; 
+  int bouncingIndex = -1;
 
   final AudioPlayer _bgNoisePlayer = AudioPlayer();
   final AudioPlayer _finalSongPlayer = AudioPlayer();
@@ -34,12 +34,18 @@ class _SortingPageState extends State<SortingPage> {
   final String clumsyMix = 'sounds/clumsy_mix.mp3';
   final String finalSong = 'sounds/final_song.mp3';
 
+  // Scroll controllers for visible arrow scrolling
+  final ScrollController _sortedScrollController = ScrollController();
+  final ScrollController _unsortedScrollController = ScrollController();
+
   @override
   void dispose() {
     _bgNoisePlayer.stop();
     _finalSongPlayer.stop();
     _bgNoisePlayer.dispose();
     _finalSongPlayer.dispose();
+    _sortedScrollController.dispose();
+    _unsortedScrollController.dispose();
     super.dispose();
   }
 
@@ -48,7 +54,9 @@ class _SortingPageState extends State<SortingPage> {
       await _bgNoisePlayer.stop();
       await _bgNoisePlayer.setReleaseMode(ReleaseMode.loop);
       await _bgNoisePlayer.play(AssetSource(clumsyMix));
-    } catch (e) {}
+    } catch (e) {
+      // ignore errors silently as before
+    }
   }
 
   Future<void> _stopClumsyBackground() async {
@@ -96,9 +104,8 @@ class _SortingPageState extends State<SortingPage> {
     required bool isBouncing,
     required Key key,
   }) {
-    final baseColor = isSorted
-        ? Colors.green
-        : (isMin ? Colors.orange : Colors.blueAccent);
+    final baseColor =
+        isSorted ? Colors.green : (isMin ? Colors.orange : Colors.blueAccent);
 
     return AnimatedScale(
       key: key,
@@ -119,10 +126,10 @@ class _SortingPageState extends State<SortingPage> {
                 blurRadius: 16,
                 spreadRadius: 2,
               ),
-            BoxShadow(
+            const BoxShadow(
               color: Colors.black26,
               blurRadius: 8,
-              offset: const Offset(2, 4),
+              offset: Offset(2, 4),
             ),
           ],
         ),
@@ -135,6 +142,19 @@ class _SortingPageState extends State<SortingPage> {
           ),
         ),
       ),
+    );
+  }
+
+  // helper to scroll safely with clamping
+  void _scrollBy(ScrollController controller, double delta) {
+    if (!controller.hasClients) return;
+    final maxExtent = controller.position.maxScrollExtent;
+    final minExtent = controller.position.minScrollExtent;
+    final target = (controller.offset + delta).clamp(minExtent, maxExtent);
+    controller.animateTo(
+      target,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
     );
   }
 
@@ -153,25 +173,47 @@ class _SortingPageState extends State<SortingPage> {
           ),
         ),
         const SizedBox(height: 8),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 420),
-          child: Wrap(
-            key: ValueKey('sorted_${sorted.length}_${numbers.length}'),
-            alignment: WrapAlignment.center,
-            children: sorted.asMap().entries.map((e) {
-              final localIdx = e.key;
-              final val = e.value;
-              final globalIdx = localIdx;
-              return _buildChip(
-                value: val,
-                isSorted: true,
-                isMin: false,
-                isCurrent: false,
-                isBouncing: bouncingIndex == globalIdx,
-                key: ValueKey('sorted_chip_$globalIdx'),
-              );
-            }).toList(),
-          ),
+        Row(
+          children: [
+            // left arrow
+            IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white70),
+              onPressed: () => _scrollBy(_sortedScrollController, -120),
+            ),
+            // scrollable row
+            Expanded(
+              child: SingleChildScrollView(
+                controller: _sortedScrollController,
+                scrollDirection: Axis.horizontal,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 420),
+                  child: Row(
+                    key:
+                        ValueKey('sorted_${sorted.length}_${numbers.length}'),
+                    children: sorted.asMap().entries.map((e) {
+                      final localIdx = e.key;
+                      final val = e.value;
+                      final globalIdx = localIdx;
+                      return _buildChip(
+                        value: val,
+                        isSorted: true,
+                        isMin: false,
+                        isCurrent: false,
+                        isBouncing: bouncingIndex == globalIdx,
+                        key: ValueKey('sorted_chip_$globalIdx'),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            // right arrow
+            IconButton(
+              icon:
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white70),
+              onPressed: () => _scrollBy(_sortedScrollController, 120),
+            ),
+          ],
         ),
         const SizedBox(height: 18),
         const Text(
@@ -183,25 +225,44 @@ class _SortingPageState extends State<SortingPage> {
           ),
         ),
         const SizedBox(height: 8),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 420),
-          child: Wrap(
-            key: ValueKey('unsorted_${unsorted.length}_${numbers.length}'),
-            alignment: WrapAlignment.center,
-            children: unsorted.asMap().entries.map((e) {
-              final local = e.key;
-              final val = e.value;
-              final globalIdx = (sortedUntil + 1) + local;
-              return _buildChip(
-                value: val,
-                isSorted: false,
-                isMin: globalIdx == minIndex,
-                isCurrent: globalIdx == currentIndex,
-                isBouncing: false,
-                key: ValueKey('unsorted_chip_$globalIdx'),
-              );
-            }).toList(),
-          ),
+        Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white70),
+              onPressed: () => _scrollBy(_unsortedScrollController, -120),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                controller: _unsortedScrollController,
+                scrollDirection: Axis.horizontal,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 420),
+                  child: Row(
+                    key: ValueKey(
+                        'unsorted_${unsorted.length}_${numbers.length}'),
+                    children: unsorted.asMap().entries.map((e) {
+                      final local = e.key;
+                      final val = e.value;
+                      final globalIdx = (sortedUntil + 1) + local;
+                      return _buildChip(
+                        value: val,
+                        isSorted: false,
+                        isMin: globalIdx == minIndex,
+                        isCurrent: globalIdx == currentIndex,
+                        isBouncing: false,
+                        key: ValueKey('unsorted_chip_$globalIdx'),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            IconButton(
+              icon:
+                  const Icon(Icons.arrow_forward_ios, color: Colors.white70),
+              onPressed: () => _scrollBy(_unsortedScrollController, 120),
+            ),
+          ],
         ),
       ],
     );
@@ -335,7 +396,6 @@ class _SortingPageState extends State<SortingPage> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

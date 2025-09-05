@@ -132,40 +132,43 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
           ),
         ),
         const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: array.map((e) {
-            bool isComparing = e == comparing;
-            bool isLoser = e == loser;
-            return AnimatedScale(
-              scale: isComparing ? 1.3 : 1.0,
-              duration: const Duration(milliseconds: 300),
-              child: AnimatedContainer(
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: array.map((e) {
+              bool isComparing = e == comparing;
+              bool isLoser = e == loser;
+              return AnimatedScale(
+                scale: isComparing ? 1.3 : 1.0,
                 duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.all(6),
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: isLoser ? Colors.red : Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 6,
-                      spreadRadius: 1,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  margin: const EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: isLoser ? Colors.red : Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 6,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    "$e",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                  ],
-                ),
-                child: Text(
-                  "$e",
-                  style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
-              ),
-            );
-          }).toList(),
+              );
+            }).toList(),
+          ),
         ),
       ],
     );
@@ -269,27 +272,30 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
                   color: Colors.white,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: mergedArray
-                    .map(
-                      (e) => Container(
-                        margin: const EdgeInsets.all(6),
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          "$e",
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: mergedArray
+                      .map(
+                        (e) => Container(
+                          margin: const EdgeInsets.all(6),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            "$e",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
             ],
           ),
