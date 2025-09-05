@@ -14,22 +14,16 @@ class HomePage1 extends StatelessWidget {
       "page": LinkedListIntroPage(),
     },
     {
-      "title": "Trees",
-      "subtitle": "Explore tree structures",
-      "color": Colors.green,
-      "page": TreeMusicPage(),
-    },
-    {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
       "color": Colors.pink,
       "page": MergingArraysPage(),
     },
     {
-      "title": "Graphs",
-      "subtitle": "Coming soon",
-      "color": Colors.teal,
-      "page": null,
+      "title": "Trees",
+      "subtitle": "Explore tree structures",
+      "color": Colors.green,
+      "page": TreeMusicPage(),
     },
     {
       "title": "Stacks",
@@ -42,6 +36,12 @@ class HomePage1 extends StatelessWidget {
       "subtitle": "Learn queue operations",
       "color": Colors.blue,
       "page": SortingPage(),
+    },
+    {
+      "title": "Graphs",
+      "subtitle": "Coming soon",
+      "color": Colors.teal,
+      "page": null,
     },
   ];
 
