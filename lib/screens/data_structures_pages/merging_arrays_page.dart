@@ -3,6 +3,8 @@ import 'dart:async';
 import 'dart:math';
 
 class MergingArraysPage extends StatefulWidget {
+  const MergingArraysPage({super.key});
+
   @override
   _MergingArraysPageState createState() => _MergingArraysPageState();
 }
@@ -14,7 +16,6 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
 
   int i = 0, j = 0;
   String message = "Starting Merge Sort...";
-
   int? comparingA;
   int? comparingB;
   int? winner;
@@ -30,7 +31,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
         message = "Comparing ${array1[i]} and ${array2[j]}";
       });
 
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
 
       if (array1[i] <= array2[j]) {
         animateCopy(array1[i], true);
@@ -38,7 +39,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
           winner = array1[i];
           loser = array2[j];
         });
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         setState(() {
           mergedArray.add(array1[i]);
           i++;
@@ -50,7 +51,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
           winner = array2[j];
           loser = array1[i];
         });
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         setState(() {
           mergedArray.add(array2[j]);
           j++;
@@ -58,7 +59,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
         });
       }
 
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       setState(() {
         comparingA = null;
         comparingB = null;
@@ -74,7 +75,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
         message = "${array1[i]} moves to merged array";
         i++;
       });
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
     }
 
     while (j < array2.length) {
@@ -84,7 +85,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
         message = "${array2[j]} moves to merged array";
         j++;
       });
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
     }
 
     setState(() {
@@ -111,7 +112,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1), mergeArrays);
+    Future.delayed(const Duration(seconds: 1), mergeArrays);
   }
 
   Widget buildArray(
@@ -124,13 +125,13 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: array.map((e) {
@@ -138,15 +139,15 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
             bool isLoser = e == loser;
             return AnimatedScale(
               scale: isComparing ? 1.3 : 1.0,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                margin: EdgeInsets.all(6),
-                padding: EdgeInsets.all(20),
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.all(6),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: isLoser ? Colors.red : Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 6,
@@ -156,7 +157,7 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
                 ),
                 child: Text(
                   "$e",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -210,10 +211,10 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text("Merge Sort Visualizer"),
+        title: const Text("Merge Sort Visualizer"),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: BackButton(
+        leading: const BackButton(
           color: Colors.white,
         ),
         actions: [
@@ -247,20 +248,20 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
           // Content
           Column(
             children: [
-              SizedBox(height: 80),
+              const SizedBox(height: 80),
               Text(
                 message,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.yellowAccent,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildArray(array1, "Sorted Array 1", comparingA, true),
               buildArray(array2, "Sorted Array 2", comparingB, false),
-              SizedBox(height: 30),
-              Text(
+              const SizedBox(height: 30),
+              const Text(
                 "Merged Array",
                 style: TextStyle(
                   fontSize: 18,
@@ -273,15 +274,15 @@ class _MergingArraysPageState extends State<MergingArraysPage> {
                 children: mergedArray
                     .map(
                       (e) => Container(
-                        margin: EdgeInsets.all(6),
-                        padding: EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           "$e",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -303,7 +304,7 @@ class AnimatedCopy extends StatefulWidget {
   final int value;
   final VoidCallback onComplete;
 
-  AnimatedCopy({
+  const AnimatedCopy({
     Key? key,
     required this.value,
     required this.onComplete,
@@ -323,11 +324,11 @@ class _AnimatedCopyState extends State<AnimatedCopy>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     );
     _offset = Tween<Offset>(
-      begin: Offset(0, 0),
-      end: Offset(0, 3),
+      begin: const Offset(0, 0),
+      end: const Offset(0, 3),
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -344,15 +345,15 @@ class _AnimatedCopyState extends State<AnimatedCopy>
       position: _offset,
       child: Center(
         child: Container(
-          margin: EdgeInsets.all(6),
-          padding: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(6),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
             "${widget.value}",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
