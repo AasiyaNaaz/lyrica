@@ -43,5 +43,6 @@ flutter:
     - assets/images/wood.png
     - assets/images/
     - assets/audio/Data_Structures_audio/
+    - assets/audio/sounds/
     - assets/musica/
   
