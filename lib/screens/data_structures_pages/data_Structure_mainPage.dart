@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lyrica/screens/data_structures_pages/Trees.dart';
 import 'package:lyrica/screens/data_structures_pages/linkedLIst.dart';
+import 'package:lyrica/screens/data_structures_pages/merging_arrays_page.dart';
+import 'package:lyrica/screens/data_structures_pages/sorting_page.dart';
+import 'package:lyrica/screens/data_structures_pages/stack_page.dart';
 
 class HomePage1 extends StatelessWidget {
   final List<Map<String, dynamic>> dataStructures = [
@@ -20,7 +23,7 @@ class HomePage1 extends StatelessWidget {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
       "color": Colors.pink.withOpacity(0.25),
-      "page": null,
+      "page": MergingArraysPage(),
     },
     {
       "title": "Graphs",
@@ -32,13 +35,13 @@ class HomePage1 extends StatelessWidget {
       "title": "Stacks",
       "subtitle": "Visualize stack behavior",
       "color": Colors.orange.withOpacity(0.25),
-      "page": null,
+      "page": StackPage(),
     },
     {
-      "title": "Queues",
+      "title": "Sorting Arrays",
       "subtitle": "Learn queue operations",
       "color": Colors.blue.withOpacity(0.25),
-      "page": null,
+      "page":SortingPage(),
     },
   ];
 
