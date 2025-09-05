@@ -9,7 +9,7 @@ Each module turns abstract concepts into interactive, playable experiences.
 
 
 ## 📌 Team Contributions
-Team Member              Contribution 
+Team Member              Contribution   
 Aasiya                 - Structures module, level design.  
 Naveka & Bhuvaneswari  - Cryptography module, puzzle design.  
 Tanuja & Subalaxmi     - Data Structures module.  
