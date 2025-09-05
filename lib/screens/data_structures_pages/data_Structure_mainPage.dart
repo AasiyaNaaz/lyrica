@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lyrica/screens/data_structures_pages/Trees.dart';
 import 'package:lyrica/screens/data_structures_pages/linkedLIst.dart';
+import 'package:lyrica/screens/data_structures_pages/merging_arrays_page.dart';
+import 'package:lyrica/screens/data_structures_pages/sorting_page.dart';
+import 'package:lyrica/screens/data_structures_pages/stack_page.dart';
 
 
 
@@ -25,27 +28,29 @@ class HomePage1 extends StatelessWidget {
       "subtitle": "Learn merging arrays",
       "icon": Icons.merge_type,
       "color": Colors.pink.withOpacity(0.25),
-      "page": null,
+      "page": MergingArraysPage(),
     },
-    {
-      "title": "Graphs",
-      "subtitle": "Coming soon",
-      "icon": Icons.timeline,
-      "color": Colors.teal.withOpacity(0.25),
-      "page": null,
-    },
+    
     {
       "title": "Stacks",
       "subtitle": "Visualize stack behavior",
       "icon": Icons.layers,
       "color": Colors.orange.withOpacity(0.25),
-      "page": null,
+      "page": StackPage(),
     },
+
     {
-      "title": "Queues",
+      "title": "Sorting",
       "subtitle": "Learn queue operations",
       "icon": Icons.queue,
       "color": Colors.blue.withOpacity(0.25),
+      "page": SortingPage(),
+    },
+    {
+      "title": "Graph",
+      "subtitle": "Coming soon",
+      "icon": Icons.timeline,
+      "color": Colors.teal.withOpacity(0.25),
       "page": null,
     },
   ];
