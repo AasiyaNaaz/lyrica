@@ -64,18 +64,18 @@ class _level2PageState extends State<level2Page>
   }
 
   String pathForAudio(String sm) {
-    String end = '.ogg';
+    String end = '.m4a';
     String path = 'audio/';
     if (sm == 'Brick') {
-      path = '${path}C/C4$end';
+      path = '${path}A/song1a$end';
     } else if (sm == 'Wood') {
-      path = '${path}D/D4$end';
+      path = '${path}A/song3a$end';
     } else if (sm == 'Steel') {
-      path = '${path}E/E4$end';
+      path = '${path}A/song7a.mp3';
     } else if (sm == 'Wind') {
       path = '${path}C/C4#$end';
     } else if (sm == 'Human Walking') {
-      path = '${path}A/A3$end';
+      path = '${path}F/F3$end';
     }
     //print(path);
     return path;

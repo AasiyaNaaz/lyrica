@@ -66,18 +66,23 @@ class _level1PageState extends State<level1Page>
       n = 7;
     }
     String s = n.toString();
-    String end = '.ogg';
+    String b = 'b';
+    String c = 'c';
+    String end = '.m4a';
     String path = 'audio/';
     if (sm == 'Brick') {
-      path = '${path}D/D$s$end';
+      if (n == 7) {
+        end = '.mp3';
+      }
+      path = '${path}B/song$s$b$end';
     } else if (sm == 'Wood') {
-      path = '${path}C/C$s$end';
+      path = '${path}C/song$s$c$end';
     } else if (sm == 'Wind') {
       path = '${path}C/C4#$end';
     } else if (sm == 'Earthquake') {
       path = '${path}F/F4#$end';
     }
-    //print(path);
+    print(path);
     return path;
   }
 
