@@ -23,9 +23,7 @@ class HomePage1 extends StatelessWidget {
       "title": "Merge Array",
       "subtitle": "Learn merging arrays",
       "color": Colors.pink.withOpacity(0.25),
-<<<<<<< HEAD
       "page": MergingArraysPage(),
-=======
       "page": null,
     },
     {
@@ -33,7 +31,6 @@ class HomePage1 extends StatelessWidget {
       "subtitle": "Coming soon",
       "color": Colors.teal.withOpacity(0.25),
       "page": null,
->>>>>>> 14722ddab64ac273a4325720bcac20eee1e3c628
     },
     
     {
