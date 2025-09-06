@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lyrica/screens/home.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-import 'package:provider/provider.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -94,7 +92,6 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
       ).pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
     });
   }
-  
 
   @override
   void dispose() {
