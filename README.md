@@ -108,19 +108,11 @@ Learn abstract data structures by translating them into musical analogies, combi
 2. 🎮 **Try It Out:** Manipulate data with interactive controls (push/pop/enqueue/traverse) and hear corresponding musical feedback.  
 3. 🏆 **Reinforce:** Complete quizzes and challenges to test understanding, enhanced by multi-sensory engagement.
 
-
 **UI/UX Enhancements:**  
 - 🌌 Gradient galaxy backgrounds for a captivating experience.  
 - ✨ Animated transitions such as bouncing, glowing highlights, and smooth scrolling to keep users engaged.  
 - 💡 Concept demo popups linking musical scales and data structure operations to aid memory retention.  
 - 🔊 Audio feedback synced with visual changes for immediate comprehension.
-
-
-## 🎮 How It Works
-1. **Learn:** Explore concepts through **music & visuals**.  
-2. **Try It Out:** Build melodies, encrypt messages, or experiment with structures.  
-3. **Decode / Play:** Solve puzzles, earn rewards, and reinforce concepts.
-
 
 ## 📸 Screenshots
 ![Structures Module](path_to_structures_screenshot.png)  
