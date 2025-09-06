@@ -115,9 +115,11 @@ Learn abstract data structures by translating them into musical analogies, combi
 - 🔊 Audio feedback synced with visual changes for immediate comprehension.
 
 ## 📸 Screenshots
-![Structures Module](path_to_structures_screenshot.png)  
-![Cryptography Module](path_to_crypto_screenshot.png)  
-![Data Structures Module](path_to_ds_screenshot.png)  
+![Structures]([path_to_structures_screenshot.png](https://docs.google.com/document/d/103WJtJF6h3kg7W3-jvusZ3UjoFGshBblv6-UVyIsVaY/edit?usp=sharing))  
+![Cryptography-I]([path_to_crypto_screenshot.png](https://docs.google.com/document/d/1cOPHK2Z9srj2H47SX2oODZcjS73hGH6gvjjeBbXQGKc/edit?usp=sharing))  
+![Data Structures-I]([path_to_ds_screenshot.png](https://docs.google.com/document/d/1ygUYFeng5anpag63h5OXK7TXNFM3xHbT5zNxqrjBHnI/edit?usp=sharing))
+![Cryptography-II]([path_to_crypto_screenshot.png](https://docs.google.com/document/d/12tEA3iG3tksbZ5msZo_dphBma0hfuDFc4Op6gelQUEE/edit?usp=drivesdk))  
+![Data Structures-II](path_to_ds_screenshot.png)
 
 
 ## 🛠️ Installation
