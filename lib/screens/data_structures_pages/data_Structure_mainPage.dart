@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lyrica/screens/Queque_page.dart';
 import 'package:lyrica/screens/data_structures_pages/Trees.dart';
 import 'package:lyrica/screens/data_structures_pages/linkedLIst.dart';
 import 'package:lyrica/screens/data_structures_pages/merging_arrays_page.dart';
@@ -37,11 +38,15 @@ class HomePage1 extends StatelessWidget {
       "color": const Color.fromARGB(255, 52, 16, 119),
       "page": SortingPage(),
     },
+
+    /*title: 'Data Structures Visualizer',
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.transparent, */
     {
-      "title": "Graphs",
-      "subtitle": "Coming soon",
-      "color": Colors.teal,
-      "page": null,
+      "title": "Queue",
+  "subtitle": "Visualize queue behavior",
+  "color": Colors.orange,
+  "page": QueueIntroPage(), 
     },
   ];
 
