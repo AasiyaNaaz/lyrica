@@ -94,6 +94,7 @@ class _HueSplashState extends State<HueSplash> with TickerProviderStateMixin {
       ).pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
     });
   }
+  
 
   @override
   void dispose() {

@@ -11,10 +11,14 @@
     flutter:
       sdk: flutter
     provider: ^6.1.1
-
-
     cupertino_icons: ^1.0.8
     audioplayers: ^6.0.0
+    shared_preferences: ^2.5.3
+    lottie: ^3.3.1
+    just_audio: ^0.9.36
+
+
+  
 
   dev_dependencies:
     flutter_test:
@@ -26,13 +30,24 @@
 
     uses-material-design: true
 
-    fonts:
-      - family: Lobster
-        fonts:
-          - asset: assets/fonts/Lobster-Regular.ttf
-    assets:
-      - assets/audio/
-      - assets/images/
-      - assets/notes
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster-Regular.ttf
+  assets:
+    - assets/audio/intro_music.m4a
+    - assets/audio/A/
+    - assets/audio/B/
+    - assets/audio/C/
+    - assets/audio/D/
+    - assets/audio/E/
+    - assets/audio/F/
+    - assets/audio/G/
+    - assets/images/
+    - assets/audio/Data_Structures_audio/
+    - assets/audio/sounds/
+    - assets/musica/
+    - assets/audio/
+    - assets/notes/
 
   
