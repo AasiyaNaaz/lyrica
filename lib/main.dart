@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lyrica/screens/home.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+import 'package:provider/provider.dart';
+
 void main() {
   runApp(const MyApp());
 }
